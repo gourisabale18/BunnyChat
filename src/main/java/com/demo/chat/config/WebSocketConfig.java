@@ -18,7 +18,12 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
+       // registry.enableSimpleBroker("/topic");
+        registry.enableStompBrokerRelay("/topic")
+                .setRelayHost("rabbitmq-server")
+                .setRelayPort(5672)
+                .setClientLogin("guest")
+                .setClientPasscode("guest");
         registry.setApplicationDestinationPrefixes("/app");
-        registry.enableSimpleBroker("/topic");
     }
 }
