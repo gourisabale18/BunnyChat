@@ -4,6 +4,7 @@ import com.demo.chat.controller.ChatMessage;
 import com.demo.chat.controller.MessageType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,8 @@ public class WebSocketEventListener {
     private final SimpMessageSendingOperations messageTemplate;
 
     /*This method gets called when user lefts the session*/
+
+    @EventListener
     public void handleWebSocketEventListener(SessionDisconnectEvent event)
     {
         StompHeaderAccessor headerAccessor=StompHeaderAccessor.wrap(event.getMessage());
